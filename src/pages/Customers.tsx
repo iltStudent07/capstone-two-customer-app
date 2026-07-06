@@ -1,6 +1,10 @@
+import CustomerList from '../components/CustomerList'
 function Customers() {
     return (
-        <h1>Customers Placeholder</h1>
+        <div>
+           <h1>Customers:</h1>
+            <CustomerList id={0} /> 
+        </div>  
     )
 }
 
