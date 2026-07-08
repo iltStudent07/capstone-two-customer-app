@@ -29,6 +29,7 @@ function Edit() {
         zip: currentCustomer.zip
     }
 
+    //Sends request to the server to update customer info
     async function handleEditSubmit(data: CustomerFormData) {
         const response = await fetch(`/api/customers/${id}`, {
             method: 'PUT',
@@ -43,7 +44,6 @@ function Edit() {
 
     return (
         <div>
-           <h1>Edit Placeholder</h1>
             <CustomerForm mode='edit' initialData={editData} onSubmit={handleEditSubmit}/> 
         </div>
     )
