@@ -1,35 +1,27 @@
-import { useEffect, useState } from 'react'
-import CustomerList from '../components/CustomerList'
 import { useCustomerContext } from '../context/CustomerContext'
+import { useEffect } from 'react'
+import CustomerList from '../components/CustomerList'
+import useCustomerApi from '../hooks/useCustomerApi'
+
 
 
 function Customers() {
+    const { fetchCustomers, deleteCustomer } = useCustomerApi()
     const { state, dispatch } = useCustomerContext()
-    const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        fetch('/api/customers')
-            .then(res => {
-                if(!res.ok) throw new Error('No users found')
-                return res.json()
-            })
-            .then((data) => {
-                dispatch({ type: 'SET_CUSTOMERS', payload: data })
-                setLoading(false)
-            })
-            .catch(() => {
-                setLoading(false)
-            })
+        fetchCustomers().catch((error) => {
+            console.error(error)
+        })
     }, [dispatch])
+
 
     //Deletes customer data with matching id to the delete button that is clicked by the user
     const handleDelete = async (id: number) => {
-        const response = await fetch(`/api/customers/${id}`, { method: 'DELETE' })
-        if (!response.ok) throw new Error('There was an error deleting the customer')
-        dispatch({ type: 'DELETE_CUSTOMER', payload: id })
+        deleteCustomer(id)
     }
 
-    if (loading) return <div>Loading...</div>
+    
     
 
     return (

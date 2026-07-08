@@ -51,24 +51,24 @@
       "zip": "02108"
     },
     {
-      "name": "Stacy Johnson",
-      "email": "joe@example.com",
-      "phone": "777-7777",
-      "address": "123 Way Street",
-      "city": "Citytown",
-      "state": "IL",
-      "zip": "12345",
-      "id": 6
-    },
-    {
       "name": "John Jacobs",
-      "email": "joe@example.com",
+      "email": "joe.jacobs@example.com",
       "phone": "123-4567",
       "address": "132 Wallaby Way",
       "city": "Sydney",
       "state": "CA",
       "zip": "67890",
       "id": 7
+    },
+    {
+      "name": "Bob Robinson",
+      "email": "bob.robinson@example.com",
+      "phone": "222-2222",
+      "address": "2 Bobbins Way",
+      "city": "Earl Grey",
+      "state": "FL",
+      "zip": "62705",
+      "id": 8
     }
   ]
 }

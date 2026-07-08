@@ -2,11 +2,14 @@ import { useParams, useNavigate } from 'react-router-dom'
 import CustomerForm from '../components/CustomerForm'
 import { useCustomerContext } from '../context/CustomerContext'
 import { type CustomerFormData } from '../types/customer'
+import useCustomerApi from '../hooks/useCustomerApi'
 
 function Edit() {
     const { id } = useParams<{ id: string }>()
     const navigate = useNavigate()
-    const { state: customerState, dispatch } = useCustomerContext()
+    const { state: customerState } = useCustomerContext()
+    const { updateCustomer } = useCustomerApi()
+
 
     //Pulls in id from context, turns it into a number and puts up a guardrail against invalid id
     const customerId = Number(id)
@@ -31,14 +34,7 @@ function Edit() {
 
     //Sends request to the server to update customer info
     async function handleEditSubmit(data: CustomerFormData) {
-        const response = await fetch(`/api/customers/${id}`, {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        })
-        if (!response.ok) throw new Error('There was an error editing the customer')
-        const updatedCustomer = await response.json()
-        dispatch({ type: 'UPDATE_CUSTOMER', payload: updatedCustomer })
+        updateCustomer(data)
         navigate('/')
     }
 

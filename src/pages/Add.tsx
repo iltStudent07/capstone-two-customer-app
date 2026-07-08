@@ -1,21 +1,14 @@
 import CustomerForm from '../components/CustomerForm'
-import { useCustomerContext } from '../context/CustomerContext'
+import useCustomerApi from '../hooks/useCustomerApi'
 import { type CustomerFormData } from '../types/customer'
 import { useNavigate } from 'react-router-dom'
 
 function Add() {
-    const { dispatch } = useCustomerContext()
     const navigate = useNavigate()
+    const { addCustomer } = useCustomerApi()
 
     async function handleAddSubmit(data: CustomerFormData) {
-        const response = await fetch('/api/customers', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(data)
-        })
-        if (!response.ok) throw new Error('There was an error adding the customer')
-        const createdCustomer = await response.json()
-        dispatch({type: 'ADD_CUSTOMER', payload: createdCustomer})
+        await addCustomer(data)
         navigate('/')
     }
 
