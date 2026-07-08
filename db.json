@@ -1,14 +1,14 @@
 {
   "customers": [
     {
-      "id": 1,
       "name": "Maria Garcia",
       "email": "maria.garcia@example.com",
       "phone": "555-0101",
       "address": "742 Evergreen Terrace",
       "city": "Springfield",
       "state": "IL",
-      "zip": "62704"
+      "zip": "62704",
+      "id": 1
     },
     {
       "id": 2,

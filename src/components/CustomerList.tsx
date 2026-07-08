@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 interface CustomerListProps {
     customers: Customer[]
-    onDelete: (id: number) => void
+    onDelete: (id: number) => void | Promise<void>
 }
 
 //Gets customer info and populates a list of customers based off the info 
