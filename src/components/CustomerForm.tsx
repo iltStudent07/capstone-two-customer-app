@@ -1,11 +1,11 @@
 import { type CustomerFormData } from '../types/customer'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 
 interface FormProps {
     mode: 'add' | 'edit',
     initialData?: CustomerFormData
     onSubmit: (data: CustomerFormData) => void| Promise<void>
+    onCancel: () => void
 }
 
 const emptyForm = {
@@ -30,7 +30,8 @@ const emptyErrors: Record<keyof CustomerFormData, string> = {
 
 const stateAbbreviationPattern = /^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)$/i
 
-function CustomerForm({mode, initialData, onSubmit}: FormProps) {
+//Renders a form that user can use to add a customer or edit existing customer info
+function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
     //sets whether the form loads with data from a customer or an empty form
     const [formData, setFormData] = useState<CustomerFormData>(initialData ?? emptyForm)
     const [errors, setErrors] = useState<Record<keyof CustomerFormData, string>>(emptyErrors)
@@ -40,7 +41,7 @@ function CustomerForm({mode, initialData, onSubmit}: FormProps) {
     const validateField = (field: FormKey, value: string): string => {
         const trimmedValue = value.trim()
 
-        //Form field validation
+        //Form field validation patterns
         switch (field) {
             case 'name':
                 if (!trimmedValue) return 'Name is required.'
@@ -75,6 +76,7 @@ function CustomerForm({mode, initialData, onSubmit}: FormProps) {
         }
     }
 
+    //Keeps track of form validation errors
     const validateForm = (data: CustomerFormData): Record<keyof CustomerFormData, string> => {
         const nextErrors: Record<keyof CustomerFormData, string> = { ...emptyErrors };
 
@@ -198,7 +200,7 @@ function CustomerForm({mode, initialData, onSubmit}: FormProps) {
                     {errors.zip && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.zip}</span>}
                 </div>
                 <button type="submit">{mode === 'edit' ? 'Update Customer' : 'Add Customer' }</button>
-                <button type="button"><Link to="/">Cancel</Link></button>  
+                <button type="button" onClick={onCancel}>Cancel</button>
             </form>
         </div>
     )

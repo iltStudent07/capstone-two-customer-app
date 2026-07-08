@@ -12,9 +12,13 @@ function Add() {
         navigate('/')
     }
 
+    function handleCancel() {
+        navigate('/')
+    }
+
     return (
         <div>
-            <CustomerForm mode='add' onSubmit={handleAddSubmit}/>  
+            <CustomerForm mode='add' onSubmit={handleAddSubmit} onCancel={handleCancel} />
         </div>
         
     )
