@@ -1,14 +1,14 @@
 {
   "customers": [
     {
-      "id": 1,
       "name": "Maria Garcia",
       "email": "maria.garcia@example.com",
       "phone": "555-0101",
       "address": "742 Evergreen Terrace",
       "city": "Springfield",
       "state": "IL",
-      "zip": "62704"
+      "zip": "62704",
+      "id": 1
     },
     {
       "id": 2,
@@ -49,6 +49,26 @@
       "city": "Boston",
       "state": "MA",
       "zip": "02108"
+    },
+    {
+      "name": "John Jacobs",
+      "email": "joe.jacobs@example.com",
+      "phone": "123-4567",
+      "address": "132 Wallaby Way",
+      "city": "Sydney",
+      "state": "CA",
+      "zip": "67890",
+      "id": 7
+    },
+    {
+      "name": "Bob Robinson",
+      "email": "bob.robinson@example.com",
+      "phone": "222-2222",
+      "address": "2 Bobbins Way",
+      "city": "Earl Grey",
+      "state": "FL",
+      "zip": "62705",
+      "id": 8
     }
   ]
 }

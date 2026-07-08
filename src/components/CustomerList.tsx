@@ -1,57 +1,39 @@
 import type { Customer } from '../types/customer'
-import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 interface CustomerListProps {
-    id: number
+    customers: Customer[]
+    onDelete: (id: number) => void | Promise<void>
 }
 
 //Gets customer info and populates a list of customers based off the info 
-function CustomerList({id}:CustomerListProps) {
-    const [customers, setCustomers] = useState<Customer[]>([])
-    const [loading, setLoading] = useState<boolean>(true)
-    const [error, setError] = useState<string | null>(null)
-    
-    useEffect(() => {
-        fetch('/api/customers')
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
-                return res.json()
-            })
-            .then((data: Customer[]) => {
-                setCustomers(data)
-                setLoading(false)
-            })
-            .catch(err => {
-                setError(err.message)
-                setLoading(false)
-            })
-    }, [id])
+function CustomerList({customers, onDelete}:CustomerListProps) {
 
-    if (loading) return <p>Loading Customer List</p>
-    if (error) return <p style={{ color: 'red'}}>Error: {error}</p>
     if (customers.length === 0) return <p>No customers found</p>
 
     return (
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>City</th>
-                <th>Actions</th>
-            </tr>
-            {customers.map(customer => (
-                <tr key={customer.id}>
+        <table style={{ width: '100%' }}>
+            <tbody>
+                <tr style={{ borderBottom: '10px solid #333'}}>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+                {customers.map(customer => (
+                <tr key={customer.id} >
                     <td>{customer.name}</td>
                     <td>{customer.email}</td>
                     <td>{customer.phone}</td>
                     <td>{customer.city}</td>
                     <td>
-                        <button>Edit</button>
-                        <button>Delete</button>
+                        <button><Link to={`/edit/${customer.id}`}>Edit</Link></button>
+                        <button onClick={() => onDelete(customer.id)}>Delete</button>
                     </td>
                 </tr>
-            ))}
+                ))}
+            </tbody>
         </table>
     )
 }
