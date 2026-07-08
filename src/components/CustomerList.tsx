@@ -13,14 +13,15 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
 
     return (
         <table style={{ width: '100%' }}>
-            <tr style={{ borderBottom: '10px solid #333'}}>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>City</th>
-                <th>Actions</th>
-            </tr>
-            {customers.map(customer => (
+            <tbody>
+                <tr style={{ borderBottom: '10px solid #333'}}>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+                {customers.map(customer => (
                 <tr key={customer.id} >
                     <td>{customer.name}</td>
                     <td>{customer.email}</td>
@@ -31,7 +32,8 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
                         <button onClick={() => onDelete(customer.id)}>Delete</button>
                     </td>
                 </tr>
-            ))}
+                ))}
+            </tbody>
         </table>
     )
 }

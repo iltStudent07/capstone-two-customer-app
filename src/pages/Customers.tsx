@@ -23,7 +23,9 @@ function Customers() {
     }, [dispatch])
 
     //Deletes customer data with matching id to the delete button that is clicked by the user
-    const handleDelete = (id: number) => {
+    const handleDelete = async (id: number) => {
+        const response = await fetch(`/api/customers/${id}`, { method: 'DELETE' })
+        if (!response.ok) throw new Error('There was an error deleting the customer')
         dispatch({ type: 'DELETE_CUSTOMER', payload: id })
     }
 

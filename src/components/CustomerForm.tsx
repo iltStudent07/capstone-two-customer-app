@@ -101,8 +101,8 @@ function CustomerForm({mode, initialData, onSubmit}: FormProps) {
                     value={formData.zip}
                     onChange={handleChange} />
                 </div>
-                <button type="submit"><Link to="/">{mode === 'edit' ? 'Update Customer' : 'Add Customer' }</Link></button>
-                <button><Link to="/">Cancel</Link></button>  
+                <button type="submit">{mode === 'edit' ? 'Update Customer' : 'Add Customer' }</button>
+                <button type="button"><Link to="/">Cancel</Link></button>  
             </form>
         </div>
     )
