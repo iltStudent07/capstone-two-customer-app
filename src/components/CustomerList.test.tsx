@@ -60,7 +60,7 @@ describe('CustomerList', () => {
 		expect(screen.getByText('No customers found')).toBeInTheDocument()
 	})
 
-	it('calls onDelete with the correct customer ID when delete is clicked', async () => {
+	it('calls onDelete with the correct customer ID only after confirming with Yes', async () => {
 		const user = userEvent.setup()
 		const onDelete = vi.fn()
 
@@ -76,8 +76,37 @@ describe('CustomerList', () => {
 		const deleteButton = within(bobRow as HTMLElement).getByRole('button', { name: 'Delete' })
 		await user.click(deleteButton)
 
+		expect(onDelete).not.toHaveBeenCalled()
+		expect(screen.getByText('Are you sure you want to delete this customer?')).toBeInTheDocument()
+
+		const yesButton = screen.getByRole('button', { name: 'Yes' })
+		await user.click(yesButton)
+
 		expect(onDelete).toHaveBeenCalledTimes(1)
 		expect(onDelete).toHaveBeenCalledWith(2)
+	})
+
+	it('does not call onDelete when No is clicked', async () => {
+		const user = userEvent.setup()
+		const onDelete = vi.fn()
+
+		render(
+			<MemoryRouter>
+				<CustomerList customers={customers} onDelete={onDelete} />
+			</MemoryRouter>
+		)
+
+		const aliceRow = screen.getByText('Alice Johnson').closest('tr')
+		expect(aliceRow).not.toBeNull()
+
+		const deleteButton = within(aliceRow as HTMLElement).getByRole('button', { name: 'Delete' })
+		await user.click(deleteButton)
+
+		const noButton = screen.getByRole('button', { name: 'No' })
+		await user.click(noButton)
+
+		expect(onDelete).not.toHaveBeenCalled()
+		expect(screen.queryByText('Are you sure you want to delete this customer?')).not.toBeInTheDocument()
 	})
 
 	it('renders edit links with the correct route for each customer', () => {

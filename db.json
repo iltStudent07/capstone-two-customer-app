@@ -69,16 +69,6 @@
       "state": "FL",
       "zip": "62705",
       "id": 8
-    },
-    {
-      "name": "Mr Fox",
-      "email": "fox@example.com",
-      "phone": "123-4567",
-      "address": "123 Way Street",
-      "city": "Citytown",
-      "state": "NH",
-      "zip": "12345",
-      "id": 9
     }
   ]
 }

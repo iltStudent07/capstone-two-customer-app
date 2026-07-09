@@ -130,8 +130,9 @@ function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
             <h1>{mode === 'edit' ? 'Edit Customer' : 'Add Customer' }</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>*Name: </label>
-                    <input 
+                    <label htmlFor="nameInput">*Name: </label>
+                    <input
+                    id="nameInput"
                     type="text" 
                     name="name" 
                     value={formData.name}
@@ -140,8 +141,9 @@ function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
                     {errors.name && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.name}</span>}
                 </div>
                 <div>
-                    <label>*Email: </label>
-                    <input 
+                    <label htmlFor="emailInput">*Email: </label>
+                    <input
+                    id="emailInput" 
                     type="text" 
                     name="email" 
                     value={formData.email}
@@ -150,8 +152,9 @@ function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
                     {errors.email && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.email}</span>}
                 </div>
                 <div>
-                    <label>*Phone: </label>
-                    <input 
+                    <label htmlFor="phoneInput" >*Phone: </label>
+                    <input
+                    id="phoneInput"
                     type="text" 
                     name="phone" 
                     value={formData.phone}
@@ -160,8 +163,9 @@ function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
                     {errors.phone && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.phone}</span>}
                 </div>
                 <div>
-                    <label>Address: </label>
-                    <input 
+                    <label htmlFor="addressInput">Address: </label>
+                    <input
+                    id="addressInput"
                     type="text" 
                     name="address" 
                     value={formData.address}
@@ -170,8 +174,9 @@ function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
                     {errors.address && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.address}</span>}
                 </div>
                 <div>
-                    <label>City: </label>
-                    <input 
+                    <label htmlFor="cityInput">City: </label>
+                    <input
+                    id="cityInput"
                     type="text" 
                     name="city" 
                     value={formData.city}
@@ -180,8 +185,9 @@ function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
                     {errors.city && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.city}</span>}
                 </div>
                 <div>
-                    <label>State: </label>
-                    <input 
+                    <label htmlFor="stateInput">State: </label>
+                    <input
+                    id="stateInput" 
                     type="text" 
                     name="state" 
                     value={formData.state}
@@ -190,8 +196,9 @@ function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
                     {errors.state && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.state}</span>}
                 </div>
                 <div>
-                    <label>Zip: </label>
-                    <input 
+                    <label htmlFor="zipInput">Zip: </label>
+                    <input
+                    id="zipInput" 
                     type="text" 
                     name="zip" 
                     value={formData.zip}
