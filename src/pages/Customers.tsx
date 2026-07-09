@@ -7,19 +7,22 @@ import useCustomerApi from '../hooks/useCustomerApi'
 
 function Customers() {
     const { fetchCustomers, deleteCustomer } = useCustomerApi()
-    const { state, dispatch } = useCustomerContext()
+    const { state } = useCustomerContext()
     const [loading, isLoading] = useState<boolean>(true)
 
     
 
     useEffect(() => {
-        fetchCustomers().catch((error) => {
-            console.error(error)
-            isLoading(false)
-        })
-    }, [dispatch])
+        fetchCustomers()
+            .catch((error) => {
+                console.error(error)
+            })
+            .finally(() => {
+                isLoading(false)
+            })
+    }, [fetchCustomers])
 
-    if(loading) <p>Loading Customers</p>
+    if(loading) return <p>Loading Customers</p>
     //Deletes customer data with matching id to the delete button that is clicked by the user
     const handleDelete = async (id: number) => {
         deleteCustomer(id)
