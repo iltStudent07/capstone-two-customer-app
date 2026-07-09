@@ -31,7 +31,7 @@ function Customers() {
     }
 
     return (
-        <div>
+        <div className="customerPage">
             <h1>Customers:</h1>
             <CustomerList customers={state.customers} onDelete={handleDelete} />
         </div>  

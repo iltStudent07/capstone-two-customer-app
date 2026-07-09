@@ -10,7 +10,7 @@ function Header() {
             backgroundColor: '#f4f6f9',
             borderBottom: '2px solid #ddd'
             }}>
-            <h2>Customer Manager</h2>
+            <h2 className="navbarHeading">Customer Manager</h2>
             <Navbar />
         </div>  
     )

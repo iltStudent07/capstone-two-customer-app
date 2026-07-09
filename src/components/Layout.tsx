@@ -4,7 +4,7 @@ function Layout({children}) {
     return (
         <div>
             <Header />
-            <main style={{ padding: '24px' }}>{children}</main>   
+            <main>{children}</main>   
         </div>
     )
 }

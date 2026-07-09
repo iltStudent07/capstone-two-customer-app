@@ -28,14 +28,14 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
 
     return (
         <div>
-           <table>
+           <table className="customerTable">
                 <thead>
                     <tr >
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>City</th>
-                        <th>Actions</th>
+                        <th className="actionCol">Actions</th>
                     </tr>
                 </thead>  
                 <tbody> 
@@ -47,18 +47,18 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
                             <td>{customer.email}</td>
                             <td>{customer.phone}</td>
                             <td>{customer.city}</td>
-                            <td>
-                                <button><Link to={`/edit/${customer.id}`}>Edit</Link></button>
-                                <button onClick={() => handleDeleteClick(customer.id)}>Delete</button>
+                            <td className="actionCol">
+                                <button className="editBtn"><Link to={`/edit/${customer.id}`}>Edit</Link></button>
+                                <button className="cancelBtn" onClick={() => handleDeleteClick(customer.id)}>Delete</button>
                             </td>
                         </tr>
                         {/* Matches the id of the delete button to the customer row and make a delete confirmation modal appear underneath that row */}
                         {customerIdToDelete === customer.id && (
                             <tr>
-                                <td colSpan={5}>
+                                <td className="confirmBox" colSpan={5}>
                                     <p>Are you sure you want to delete this customer?</p>
-                                    <button onClick={() => handleConfirmDelete(customer.id)}>Yes</button>
-                                    <button onClick={handleCancelDelete}>No</button>
+                                    <button className="modalConfirm" onClick={() => handleConfirmDelete(customer.id)}>Yes</button>
+                                    <button className="modalCancel" onClick={handleCancelDelete}>No</button>
                                 </td>
                             </tr>
                         )}
