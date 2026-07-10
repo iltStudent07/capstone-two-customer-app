@@ -10,10 +10,16 @@ interface ErrorBoundaryState {
     hasError: boolean
 }
 
+const initialState: ErrorBoundaryState = {
+    error: null,
+    errorInfo: null,
+    hasError: false,
+}
+
 class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
     constructor(props: ErrorBoundaryProps) {
         super(props)
-        this.state = { error: null, errorInfo: null, hasError: false }
+        this.state = initialState
     }
 
     //Update state to show fallback UI
@@ -30,19 +36,19 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
         })
     }
 
-    resetErrorBoundary() {
-        this.setState({ hasError: false})
+    resetErrorBoundary = () => {
+        this.setState(initialState)
     }
 
     render() {
-        if (this.state.errorInfo) {
+        if (this.state.hasError) {
             return (
                 <div style={{ padding: "20px", backgroundColor: "#ffe6e6", color: "#900" }}>
                     <h2>Something went wrong!</h2>
                     <details>
                         {this.state.error && this.state.error.toString()}
                         <br />
-                        {this.state.errorInfo.componentStack}
+                        {this.state.errorInfo?.componentStack}
                     </details>
                     <button onClick={this.resetErrorBoundary}>Try Again</button>
                 </div>
