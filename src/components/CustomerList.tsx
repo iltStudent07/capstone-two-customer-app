@@ -57,11 +57,14 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
     const sortedCustomers = useMemo(() => {
         if (!sorting.key || !sorting.direction) return filteredData
 
+        const sortKey = sorting.key
+        const sortDirection = sorting.direction
+
         return [...filteredData].sort((a, b) => {
-            const valA = a[sorting.key]
-            const valB = b[sorting.key]
-            if (valA < valB) return sorting.direction === 'asc' ? -1 : 1
-            if (valA > valB) return sorting.direction === 'asc' ? 1 : -1
+            const valA = a[sortKey]
+            const valB = b[sortKey]
+            if (valA < valB) return sortDirection === 'asc' ? -1 : 1
+            if (valA > valB) return sortDirection === 'asc' ? 1 : -1
             return 0
         })
         

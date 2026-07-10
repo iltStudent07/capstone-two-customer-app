@@ -63,9 +63,9 @@
     {
       "name": "Bob Robinson",
       "email": "bob.robinson@example.com",
-      "phone": "222-2222",
+      "phone": "222-2244",
       "address": "2 Bobbins Way",
-      "city": "Earl Grey",
+      "city": "Miami",
       "state": "FL",
       "zip": "62705",
       "id": 8
@@ -99,6 +99,16 @@
       "state": "NY",
       "zip": "12345",
       "id": 11
+    },
+    {
+      "name": "Tim Sweeny",
+      "email": "tim.sweeny@example.com",
+      "phone": "101-1010",
+      "address": "777 Liberty Ave",
+      "city": "Boston",
+      "state": "MA",
+      "zip": "12345",
+      "id": 12
     }
   ]
 }
