@@ -1,11 +1,12 @@
 import { type CustomerFormData } from '../types/customer'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import '../App.css'
 
 interface FormProps {
     mode: 'add' | 'edit',
     initialData?: CustomerFormData
     onSubmit: (data: CustomerFormData) => void| Promise<void>
+    onCancel: () => void
 }
 
 const emptyForm = {
@@ -30,7 +31,8 @@ const emptyErrors: Record<keyof CustomerFormData, string> = {
 
 const stateAbbreviationPattern = /^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)$/i
 
-function CustomerForm({mode, initialData, onSubmit}: FormProps) {
+//Renders a form that user can use to add a customer or edit existing customer info
+function CustomerForm({mode, initialData, onSubmit, onCancel}: FormProps) {
     //sets whether the form loads with data from a customer or an empty form
     const [formData, setFormData] = useState<CustomerFormData>(initialData ?? emptyForm)
     const [errors, setErrors] = useState<Record<keyof CustomerFormData, string>>(emptyErrors)
@@ -40,7 +42,7 @@ function CustomerForm({mode, initialData, onSubmit}: FormProps) {
     const validateField = (field: FormKey, value: string): string => {
         const trimmedValue = value.trim()
 
-        //Form field validation
+        //Form field validation patterns
         switch (field) {
             case 'name':
                 if (!trimmedValue) return 'Name is required.'
@@ -75,6 +77,7 @@ function CustomerForm({mode, initialData, onSubmit}: FormProps) {
         }
     }
 
+    //Keeps track of form validation errors
     const validateForm = (data: CustomerFormData): Record<keyof CustomerFormData, string> => {
         const nextErrors: Record<keyof CustomerFormData, string> = { ...emptyErrors };
 
@@ -85,6 +88,7 @@ function CustomerForm({mode, initialData, onSubmit}: FormProps) {
         return nextErrors
     }
 
+    //Returns errors if any validation fails
     const hasErrors = (validationErrors: Record<keyof CustomerFormData, string>) => {
         return Object.values(validationErrors).some((error) => error.length > 0)
     }
@@ -124,82 +128,93 @@ function CustomerForm({mode, initialData, onSubmit}: FormProps) {
     })
 
     return (
-        <div>
+        <div className="formContainer">
             <h1>{mode === 'edit' ? 'Edit Customer' : 'Add Customer' }</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>*Name: </label>
-                    <input 
-                    type="text" 
-                    name="name" 
-                    value={formData.name}
-                    onChange={handleChange}
-                    style={getInputStyle('name')}/>
-                    {errors.name && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.name}</span>}
-                </div>
-                <div>
-                    <label>*Email: </label>
-                    <input 
-                    type="text" 
-                    name="email" 
-                    value={formData.email}
-                    onChange={handleChange}
-                    style={getInputStyle('email')} />
-                    {errors.email && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.email}</span>}
-                </div>
-                <div>
-                    <label>*Phone: </label>
-                    <input 
-                    type="text" 
-                    name="phone" 
-                    value={formData.phone}
-                    onChange={handleChange}
-                    style={getInputStyle('phone')} />
-                    {errors.phone && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.phone}</span>}
-                </div>
-                <div>
-                    <label>Address: </label>
-                    <input 
-                    type="text" 
-                    name="address" 
-                    value={formData.address}
-                    onChange={handleChange}
-                    style={getInputStyle('address')} />
-                    {errors.address && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.address}</span>}
-                </div>
-                <div>
-                    <label>City: </label>
-                    <input 
-                    type="text" 
-                    name="city" 
-                    value={formData.city}
-                    onChange={handleChange}
-                    style={getInputStyle('city')} />
-                    {errors.city && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.city}</span>}
-                </div>
-                <div>
-                    <label>State: </label>
-                    <input 
-                    type="text" 
-                    name="state" 
-                    value={formData.state}
-                    onChange={handleChange}
-                    style={getInputStyle('state')} />
-                    {errors.state && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.state}</span>}
-                </div>
-                <div>
-                    <label>Zip: </label>
-                    <input 
-                    type="text" 
-                    name="zip" 
-                    value={formData.zip}
-                    onChange={handleChange}
-                    style={getInputStyle('zip')} />
-                    {errors.zip && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.zip}</span>}
-                </div>
-                <button type="submit">{mode === 'edit' ? 'Update Customer' : 'Add Customer' }</button>
-                <button type="button"><Link to="/">Cancel</Link></button>  
-            </form>
+            <div>
+                <form className="customerForm" onSubmit={handleSubmit}>
+                    <div className="form-container">
+                        <label htmlFor="nameInput">*Name: </label>
+                        <input
+                        id="nameInput"
+                        type="text" 
+                        name="name" 
+                        value={formData.name}
+                        onChange={handleChange}
+                        style={getInputStyle('name')}/>
+                        {errors.name && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.name}</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="emailInput">*Email: </label>
+                        <input
+                        id="emailInput" 
+                        type="text" 
+                        name="email" 
+                        value={formData.email}
+                        onChange={handleChange}
+                        style={getInputStyle('email')} />
+                        {errors.email && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.email}</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="phoneInput" >*Phone: </label>
+                        <input
+                        id="phoneInput"
+                        type="text" 
+                        name="phone" 
+                        value={formData.phone}
+                        onChange={handleChange}
+                        style={getInputStyle('phone')} />
+                        {errors.phone && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.phone}</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="addressInput">Address: </label>
+                        <input
+                        id="addressInput"
+                        type="text" 
+                        name="address" 
+                        value={formData.address}
+                        onChange={handleChange}
+                        style={getInputStyle('address')} />
+                        {errors.address && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.address}</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="cityInput">City: </label>
+                        <input
+                        id="cityInput"
+                        type="text" 
+                        name="city" 
+                        value={formData.city}
+                        onChange={handleChange}
+                        style={getInputStyle('city')} />
+                        {errors.city && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.city}</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="stateInput">State: </label>
+                        <input
+                        id="stateInput" 
+                        type="text" 
+                        name="state" 
+                        value={formData.state}
+                        onChange={handleChange}
+                        style={getInputStyle('state')} />
+                        {errors.state && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.state}</span>}
+                    </div>
+                    <div>
+                        <label htmlFor="zipInput">Zip: </label>
+                        <input
+                        id="zipInput" 
+                        type="text" 
+                        name="zip" 
+                        value={formData.zip}
+                        onChange={handleChange}
+                        style={getInputStyle('zip')} />
+                        {errors.zip && <span style={{ color: 'red', marginLeft: '8px' }}>{errors.zip}</span>}
+                    </div>
+                    <div>
+                        <button className="confirmButton" type="submit"><span>{mode === 'edit' ? 'Update Customer' : 'Add    Customer' }</span></button>
+                        <button className="cancelButton" type="button" onClick={onCancel}>Cancel</button>  
+                    </div> 
+                </form>
+            </div>
         </div>
     )
 }

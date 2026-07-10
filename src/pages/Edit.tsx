@@ -38,9 +38,13 @@ function Edit() {
         navigate('/')
     }
 
+    function handleCancel() {
+        navigate('/')
+    }
+
     return (
         <div>
-            <CustomerForm mode='edit' initialData={editData} onSubmit={handleEditSubmit}/> 
+            <CustomerForm mode='edit' initialData={editData} onSubmit={handleEditSubmit} onCancel={handleCancel} />
         </div>
     )
 }

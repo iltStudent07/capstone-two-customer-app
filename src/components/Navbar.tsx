@@ -2,10 +2,13 @@ import { NavLink } from 'react-router-dom'
 
 function Navbar() {
     const linkStyle = ({ isActive }: { isActive: boolean }) => ({
-        color: isActive ? '#2574A9' : '#333',
+        color: isActive ? 'white' : '#333',
+        fontSize: '16px',
+        background: isActive ? 'darkblue' : 'lightgrey',
         fontweight: isActive ? 'bold' as const : 'normal' as const,
         textDecoration: 'none',
-        padding: '8px 16px',
+        padding: '10px 8px',
+        borderRadius: '5px',
     });
 
     return (
@@ -13,8 +16,8 @@ function Navbar() {
             display: 'flex',
             gap: '8px'
         }}>
-            <button><NavLink to="/" style={linkStyle}>Customers</NavLink></button>
-            <button><NavLink to="/add" style={linkStyle}>Add</NavLink></button>
+            <NavLink to="/" style={linkStyle}>Customers</NavLink>
+            <NavLink to="/add" style={linkStyle}>Add Customer</NavLink>
         </nav>
     )
 }
