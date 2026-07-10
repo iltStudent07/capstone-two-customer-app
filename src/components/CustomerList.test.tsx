@@ -77,7 +77,7 @@ describe('CustomerList', () => {
 		await user.click(deleteButton)
 
 		expect(onDelete).not.toHaveBeenCalled()
-		expect(screen.getByText('Are you sure you want to delete this customer?')).toBeInTheDocument()
+		expect(screen.getByText('^ Are you sure you want to delete this customer? ^')).toBeInTheDocument()
 
 		const yesButton = screen.getByRole('button', { name: 'Yes' })
 		await user.click(yesButton)
@@ -106,7 +106,7 @@ describe('CustomerList', () => {
 		await user.click(noButton)
 
 		expect(onDelete).not.toHaveBeenCalled()
-		expect(screen.queryByText('Are you sure you want to delete this customer?')).not.toBeInTheDocument()
+		expect(screen.queryByText('^ Are you sure you want to delete this customer? ^')).not.toBeInTheDocument()
 	})
 
 	it('renders edit links with the correct route for each customer', () => {
