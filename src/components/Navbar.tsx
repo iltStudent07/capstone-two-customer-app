@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 function Navbar() {
     const linkStyle = ({ isActive }: { isActive: boolean }) => ({
         color: isActive ? 'white' : '#333',
-        fontSize: '18px',
+        fontSize: '16px',
         background: isActive ? 'darkblue' : 'lightgrey',
         fontweight: isActive ? 'bold' as const : 'normal' as const,
         textDecoration: 'none',
