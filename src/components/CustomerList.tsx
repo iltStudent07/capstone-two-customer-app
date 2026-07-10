@@ -79,6 +79,7 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
         <div>
             <div className="searchBarBox">
                 <input
+                    id="searchBar"
                     className="searchBar"
                     type="text"
                     placeholder="Search..."
@@ -93,7 +94,7 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
             </div>
         
             <div>
-                {filteredData.length === 0 ? <p className="filterMess">No results found</p> : `Showing ${filteredData.length} of ${customers.length}`}
+                {filteredData.length === 0 ? <p className="filterMess">No results found</p> : <p className="filterMess">Showing {filteredData.length} of {customers.length}</p>}
             </div>
             <table className="customerTable">
                 <thead>

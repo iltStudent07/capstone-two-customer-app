@@ -1,16 +1,19 @@
 import Navbar from './Navbar'
+import { useTheme } from '../context/ThemeContext'
+import { useEffect } from 'react'
 
 function Header() {
+    const { theme, toggleTheme } = useTheme()
+
+    useEffect(() => {
+        document.documentElement.classList.remove('App', 'DarkTheme')
+        document.documentElement.classList.add(theme === 'light' ? 'App' : 'DarkTheme')
+    }, [theme])
+
     return (
-        <div style={{ 
-            display: "flex",
-            justifyContent: 'space-between',
-            gap: '8px',
-            padding: '16px',
-            backgroundColor: '#f4f6f9',
-            borderBottom: '2px solid #ddd'
-            }}>
+        <div className="headerContainer">
             <h2 className="navbarHeading">Customer Manager</h2>
+            <button onClick={ toggleTheme }>{theme === 'light' ? 'Dark 🌙' : 'Light ☀️'} </button>
             <Navbar />
         </div>  
     )

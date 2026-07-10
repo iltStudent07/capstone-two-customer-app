@@ -1,97 +1,101 @@
-html.App,
-html.App body,
-html.App #root {
-  background: #f4f6f9;
+html.DarkTheme,
+html.DarkTheme body,
+html.DarkTheme #root {
+  background: #333;
   transition: 0.5s ease, color 0.3s ease;
 }
 
-
 /*Header*/
-.App .headerContainer {
+.DarkTheme .headerContainer {
   display: flex;
   justify-content: space-between;
   gap: 8px;
   padding: 16px;
-  background-color: #f4f6f9;
-  border-bottom: 2px solid #ddd;
+  background-color: #1f2329;
+  border-bottom: 2px solid #3a414b;
 }
 
-.App .navbarHeading {
+.DarkTheme .navbarHeading {
   margin-top: 8px;
-  color: rgb(69, 69, 243)
+  color: rgb(252, 252, 252)
 }
 
 
 /*Customers Page*/
-.App .customerPage h1 {
+.DarkTheme .customerPage h1 {
   padding-bottom: 20px;
+  color: white;
 }
 
-.App .searchBarBox {
+.DarkTheme .searchBarBox {
   display: flex
 
 }
 
-.App .searchBar {
+.DarkTheme .searchBar {
   border-radius: 5px 0 0 5px;
 }
 
-.App .searchBtn {
+.DarkTheme .searchBtn {
   height: 38px;
   width: 40px;
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
 
-.App .searchBtn:hover {
+.DarkTheme .searchBtn:hover {
   background: gray;
   color: white;
 }
 
 /*Customer List*/
-.App .customerTable {
+.DarkTheme .customerTable {
   width: min(100%, 1100px);
   margin-inline: auto;   /* horizontal centering */
   border-collapse: collapse;
   margin-bottom: 250px;
 }
 
-.App .customerTable th:last-child,
-.App .customerTable td:last-child {
+.DarkTheme .customerTable th:last-child,
+.DarkTheme .customerTable td:last-child {
   width: 50px;          /* widen Actions column */
   white-space: nowrap;
 }
 
-.App thead tr{
-  background: lightgray;
+.DarkTheme thead tr{
+  color: white;
+  background: #1f2329;
   border-bottom: thin solid lightslategray;
   border-radius: 10px;
   text-align: left;
 }
 
-.App thead th {
+.DarkTheme thead th {
   padding: 10px;
   width: 20px;
 }
 
-.App .filterMess {
+.DarkTheme .filterMess {
   text-align: center;
+  color: white;
 
 }
 
-.App table td {
+.DarkTheme table td {
   width: 20px;
   padding: 16px 14px;
-  border-bottom: thin solid rgb(221, 230, 238);
+  color: white;
+  background: darkblue;
+  border-bottom: thin solid rgb(11, 110, 197);
   text-align: left;
   font-size: 16px;
 }
 
-.App .actionCol {
+.DarkTheme .actionCol {
   width: 30px;
 }
 
-.App .editBtn {
+.DarkTheme .editBtn {
   background: rgb(24, 170, 24);
   color: whitesmoke;
   font-size: 18px;
@@ -101,16 +105,16 @@ html.App #root {
   border-radius: 5px;
 }
 
-.App .editBtn :link {
+.DarkTheme .editBtn :link {
   text-decoration: none;
   color: whitesmoke;
 }
 
-.App .editBtn :visited {
+.DarkTheme .editBtn :visited {
   color: whitesmoke;
 }
 
-.App .cancelBtn {
+.DarkTheme .cancelBtn {
   background: rgb(243, 0, 0);
   color: whitesmoke;
   font-size: 18px;
@@ -121,8 +125,8 @@ html.App #root {
   cursor: pointer;
 }
 
-.App .confirmBox {
-  background: lightcyan;
+.DarkTheme .confirmBox {
+  background: rgb(14, 250, 250);
   border: 2px solid lightslategray;
   text-align: center;
   color: black;
@@ -130,7 +134,7 @@ html.App #root {
   font-size: 18px;
 }
 
-.App .modalConfirm {
+.DarkTheme .modalConfirm {
   background: rgb(24, 170, 24);
   color: whitesmoke;
   font-size: 20px;
@@ -141,7 +145,7 @@ html.App #root {
   cursor: pointer;
 }
 
-.App .modalCancel {
+.DarkTheme .modalCancel {
   background: rgb(243, 0, 0);
   color: whitesmoke;
   font-size: 20px;
@@ -154,19 +158,22 @@ html.App #root {
 
 
 /*Customer Form*/
-.App .customerForm {
+.DarkTheme .formContainer h1 {
+    color: white
+}
+.DarkTheme .customerForm {
   max-width: 500px;
   padding: 10px;
   margin: 0 auto;
   display: 'block';
   justify-content: center;
-  background: #333;
+  background: #1f2329;
   color: white;
-  border: 2px solid black;
+  border: 2px solid lightblue;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-.App label {
+.DarkTheme label {
   display: block;
   text-align: left;
   margin-left: 45px;
@@ -174,7 +181,7 @@ html.App #root {
   padding-bottom: 10px;
 }
 
-.App input {
+.DarkTheme input {
   display: flex;
   margin-left: 45px;
   width: 350px;
@@ -184,13 +191,13 @@ html.App #root {
   font-size: 20px;
 }
 
-.App form button {
+.DarkTheme form button {
   flex-direction: inline-block;
   padding: 10px;
   margin: 10px;
 }
 
-.App .confirmButton {
+.DarkTheme .confirmButton {
   color: white;
   background-color: darkblue;
   border-radius: 5px;
@@ -200,7 +207,7 @@ html.App #root {
   cursor: pointer;
 }
 
-.App .cancelButton {
+.DarkTheme .cancelButton {
   background: lightgray;
   border-radius: 5px;
   border: none;
