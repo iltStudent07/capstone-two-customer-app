@@ -8,18 +8,20 @@ interface CustomerListProps {
     onDelete: (id: number) => void | Promise<void>
 }
 
+type SortDirection = 'asc' | 'desc' | null
+
 //Gets customer info and populates a list of customers based off the info 
 function CustomerList({customers, onDelete}:CustomerListProps) {
     const [customerIdToDelete, setCustomerIdToDelete] = useState<number | null>(null)
     const [searchTerm, setSearchTerm] = useState('')
-    const [sorting, setSorting] = useLocalStorage<{ key: keyof Customer; ascending: boolean }>('customerListSorting', { key: 'name', ascending: true })
+    const [sorting, setSorting] = useLocalStorage<{ key: keyof Customer | null, direction: SortDirection}>('customerListSorting', {key: null, direction: null})
 
 
     //filters down data from the customer array when typing in the search bar
     const filteredData = customers.filter((customer) =>
         customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         customer.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        customer.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        customer.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
         customer.city.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
@@ -53,27 +55,36 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
 
     //sorts customers in the list alphabetically
     const sortedCustomers = useMemo(() => {
+        if (!sorting.key || !sorting.direction) return filteredData
+
         return [...filteredData].sort((a, b) => {
             const valA = a[sorting.key]
             const valB = b[sorting.key]
-            if (valA < valB) return sorting.ascending ? -1 : 1
-            if (valA > valB) return sorting.ascending ? 1: -1
+            if (valA < valB) return sorting.direction === 'asc' ? -1 : 1
+            if (valA > valB) return sorting.direction === 'asc' ? 1 : -1
             return 0
         })
+        
     }, [filteredData, sorting])
-
+    
+    //applies the sorting direction
     const applySorting = (key: keyof Customer) => {
-        if (sorting.key === key) {
-            setSorting({...sorting, ascending: !sorting.ascending })
-        } else {
-            setSorting({key, ascending: true })
-        }
+        if (sorting.key !== key) return setSorting({key, direction: 'asc' })
+        if (sorting.direction ==='asc') return setSorting({key, direction: 'desc' })
+        
+        return setSorting({ key: null, direction: null})
     }
 
+    //sets the icon in the table header based off of whether a column is being sorted or not and in which direction if it is
+    const sortIcon = (key: keyof Customer) =>
+        sorting.key !== key || !sorting.direction ? '↑↓' : sorting.direction
+        === 'asc' ? '↑' : '↓'
+
+    if (!customers.length) return <p>No customers found</p>
 
     if (filteredData.length === 0) <p>There was 0 matches</p>
 
-    if (customers.length === 0) return <p>No customers found</p>
+    
     
     return (
         <div>
@@ -100,14 +111,14 @@ function CustomerList({customers, onDelete}:CustomerListProps) {
                 <thead>
                     <tr >
                         <th onClick={() => applySorting('name')}>Name
-                            <span>{sorting.key === 'name' ? (sorting.ascending ? '↑' : '↓') : ''}</span>
+                            <span>{sortIcon('name')}</span>
                         </th>
                         <th onClick={() => applySorting('email')}>Email
-                            <span>{sorting.key === 'email' ? (sorting.ascending ? '↑' : '↓') : ''}</span>
+                            <span>{sortIcon('email')}</span>
                         </th>
                         <th>Phone</th>
                         <th onClick={() => applySorting('city')}>City
-                            <span>{sorting.key === 'city' ? (sorting.ascending ? '↑' : '↓') : ''}</span>
+                            <span>{sortIcon('city')}</span>
                         </th>
                         <th className="actionCol">Actions</th>
                     </tr>
