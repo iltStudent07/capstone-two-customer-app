@@ -62,7 +62,7 @@
     },
     {
       "name": "Bob Robinson",
-      "email": "robert.robinson@example.com",
+      "email": "bob.robinson@example.com",
       "phone": "222-2222",
       "address": "2 Bobbins Way",
       "city": "Earl Grey",
@@ -71,8 +71,8 @@
       "id": 8
     },
     {
-      "name": "William Maruchan",
-      "email": "william.maruchan@example.com",
+      "name": "Will Maruchan",
+      "email": "will.maruchan@example.com",
       "phone": "222-2222",
       "address": "123 Way Street",
       "city": "New York",
